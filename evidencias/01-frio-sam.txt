@@ -1,0 +1,48 @@
+No current session found, using default AWS::AccountId
+Mounting GuiaTransporte at http://127.0.0.1:3101/guias [POST]
+You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. If you used sam build before running local commands, you will need to re-run sam build for the changes to be picked up. You only need to restart SAM CLI if you update your AWS SAM template
+2026-11-26 16:29:09 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:3101
+2026-11-26 16:29:09 [33mPress CTRL+C to quit[0m
+2026-11-26 16:29:09 127.0.0.1 - - [26/Nov/2026 16:29:09] "[31m[1mGET / HTTP/1.1[0m" 403 -
+Invoking app.lambda_handler (python3.12)
+Local image is up-to-date
+Using local image: public.ecr.aws/lambda/python:3.12-rapid-x86_64.
+
+Mounting [pasta do projeto]\.aws-sam\build\GuiaTransporte as /var/task:ro,delegated, inside runtime container
+SAM_CONTAINER_ID: 5d2d126231e4c53e58f8fe6115904958d29d7a803227bc4bdd083756aa386873
+START RequestId: 3a0997da-cd34-4cdc-9932-103be7a6a2cc Version: $LATEST
+END RequestId: 3a0997da-cd34-4cdc-9932-103be7a6a2cc
+REPORT RequestId: 3a0997da-cd34-4cdc-9932-103be7a6a2cc	Init Duration: 0.03 ms	Duration: 63.75 ms	Billed Duration: 64 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+2026-11-26 16:29:15 127.0.0.1 - - [26/Nov/2026 16:29:15] "[35m[1mPOST /guias HTTP/1.1[0m" 201 -
+Invoking app.lambda_handler (python3.12)
+Using local image: public.ecr.aws/lambda/python:3.12-rapid-x86_64.
+
+Mounting [pasta do projeto]\.aws-sam\build\GuiaTransporte as /var/task:ro,delegated, inside runtime container
+SAM_CONTAINER_ID: 34348ba451fcbe307886ab0199196a01c9cb5122449cb43a667e5e25fe2abf67
+START RequestId: 920e3b45-8189-4094-a212-248bd0582871 Version: $LATEST
+END RequestId: 920e3b45-8189-4094-a212-248bd0582871
+REPORT RequestId: 920e3b45-8189-4094-a212-248bd0582871	Init Duration: 0.02 ms	Duration: 41.63 ms	Billed Duration: 42 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+2026-11-26 16:29:16 127.0.0.1 - - [26/Nov/2026 16:29:16] "[35m[1mPOST /guias HTTP/1.1[0m" 201 -
+Invoking app.lambda_handler (python3.12)
+Using local image: public.ecr.aws/lambda/python:3.12-rapid-x86_64.
+
+Mounting [pasta do projeto]\.aws-sam\build\GuiaTransporte as /var/task:ro,delegated, inside runtime container
+SAM_CONTAINER_ID: abcbbba7be75c0c0fa475d01d9fd6fd5e8529510cb145f99ba28528ab80f98b7
+START RequestId: 3929e7f3-04a6-49f1-bb78-1c410babff71 Version: $LATEST
+END RequestId: 3929e7f3-04a6-49f1-bb78-1c410babff71
+REPORT RequestId: 3929e7f3-04a6-49f1-bb78-1c410babff71	Init Duration: 0.06 ms	Duration: 63.33 ms	Billed Duration: 64 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+2026-11-26 16:29:18 127.0.0.1 - - [26/Nov/2026 16:29:18] "[35m[1mPOST /guias HTTP/1.1[0m" 201 -
+Invoking app.lambda_handler (python3.12)
+Using local image: public.ecr.aws/lambda/python:3.12-rapid-x86_64.
+
+Mounting [pasta do projeto]\.aws-sam\build\GuiaTransporte as /var/task:ro,delegated, inside runtime container
+SAM_CONTAINER_ID: 94203bf9e8473201f1766f781b8ab69370c9a246d77ce1d09f8a3f4a005283b7
+START RequestId: 748eb534-fa44-43a1-a46f-e25bc25422f4 Version: $LATEST
+END RequestId: 748eb534-fa44-43a1-a46f-e25bc25422f4
+REPORT RequestId: 748eb534-fa44-43a1-a46f-e25bc25422f4	Init Duration: 0.09 ms	Duration: 58.81 ms	Billed Duration: 59 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+2026-11-26 16:29:20 127.0.0.1 - - [26/Nov/2026 16:29:20] "[31m[1mPOST /guias HTTP/1.1[0m" 400 -

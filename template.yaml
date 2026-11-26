@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Emissao de guia de transporte do Hemobit (atividade individual)
+
+Parameters:
+  TimeoutSegundos:
+    Type: Number
+    Default: 3
+    AllowedValues: [3, 10]
+
+Globals:
+  Function:
+    Timeout: !Ref TimeoutSegundos
+    MemorySize: 128
+
+Resources:
+  GuiaTransporte:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: funcao/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Architectures: [x86_64]
+      Events:
+        EmitirGuia:
+          Type: Api
+          Properties:
+            Path: /guias
+            Method: post

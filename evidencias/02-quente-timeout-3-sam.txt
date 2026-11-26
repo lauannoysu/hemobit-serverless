@@ -1,0 +1,42 @@
+No current session found, using default AWS::AccountId
+Mounting GuiaTransporte at http://127.0.0.1:3102/guias [POST]
+You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. If you used sam build before running local commands, you will need to re-run sam build for the changes to be picked up. You only need to restart SAM CLI if you update your AWS SAM template
+2026-11-26 16:29:22 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:3102
+2026-11-26 16:29:22 [33mPress CTRL+C to quit[0m
+2026-11-26 16:29:22 127.0.0.1 - - [26/Nov/2026 16:29:22] "[31m[1mGET / HTTP/1.1[0m" 403 -
+Invoking app.lambda_handler (python3.12)
+Local image is up-to-date
+Using local image: public.ecr.aws/lambda/python:3.12-rapid-x86_64.
+
+Mounting [pasta do projeto]\.aws-sam\build\GuiaTransporte as /var/task:ro,delegated, inside runtime container
+SAM_CONTAINER_ID: 738cb6115ba9070958f6adb729ceea99a9e9c53fe51aa490609aa6e277113ac2
+START RequestId: 33cbf194-3b33-43e6-a31e-c3ba054ab1dc Version: $LATEST
+END RequestId: 33cbf194-3b33-43e6-a31e-c3ba054ab1dc
+REPORT RequestId: 33cbf194-3b33-43e6-a31e-c3ba054ab1dc	Init Duration: 0.03 ms	Duration: 64.58 ms	Billed Duration: 65 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+2026-11-26 16:29:26 127.0.0.1 - - [26/Nov/2026 16:29:26] "[35m[1mPOST /guias HTTP/1.1[0m" 201 -
+Invoking app.lambda_handler (python3.12)
+Lambda function 'GuiaTransporte' is already running
+START RequestId: 8fc5212d-1a1a-43bc-8d91-e07286e9fc20 Version: $LATEST
+END RequestId: 8fc5212d-1a1a-43bc-8d91-e07286e9fc20
+REPORT RequestId: 8fc5212d-1a1a-43bc-8d91-e07286e9fc20	Duration: 1.53 ms	Billed Duration: 2 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+2026-11-26 16:29:28 127.0.0.1 - - [26/Nov/2026 16:29:28] "[35m[1mPOST /guias HTTP/1.1[0m" 201 -
+Invoking app.lambda_handler (python3.12)
+Lambda function 'GuiaTransporte' is already running
+START RequestId: 3154f803-8aee-4fee-a545-7c937e829af2 Version: $LATEST
+END RequestId: 3154f803-8aee-4fee-a545-7c937e829af2
+REPORT RequestId: 3154f803-8aee-4fee-a545-7c937e829af2	Duration: 1.95 ms	Billed Duration: 2 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+2026-11-26 16:29:29 127.0.0.1 - - [26/Nov/2026 16:29:29] "[35m[1mPOST /guias HTTP/1.1[0m" 201 -
+Invoking app.lambda_handler (python3.12)
+Lambda function 'GuiaTransporte' is already running
+START RequestId: aa2c86df-000d-4cce-80d7-d4fc3b8a22bb Version: $LATEST
+Function 'GuiaTransporte' timed out after 3 seconds
+26 Nov 2026 19:29:33,163 [ERROR] (rapid) Invoke failed error=errResetReceived InvokeID=aa2c86df-000d-4cce-80d7-d4fc3b8a22bb
+END RequestId: aa2c86df-000d-4cce-80d7-d4fc3b8a22bb
+REPORT RequestId: aa2c86df-000d-4cce-80d7-d4fc3b8a22bb	Duration: 3000.00 ms	Billed Duration: 3000 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+Invalid lambda response received: Lambda response must be valid json
+2026-11-26 16:29:33 127.0.0.1 - - [26/Nov/2026 16:29:33] "[35m[1mPOST /guias HTTP/1.1[0m" 502 -

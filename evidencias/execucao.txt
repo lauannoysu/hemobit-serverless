@@ -1,0 +1,240 @@
+2026-11-26T16:28:41.070749-03:00
+> sam --version
+SAM CLI, version 1.174.1
+
+> sam local generate-event apigateway aws-proxy --method POST --path guias --body {"requisicaoId":"HEMO-42","hospital":"Hospital Recife (exemplo)","bolsas":["CH-O-0142"]}
+{
+  "body": "eyJyZXF1aXNpY2FvSWQiOiJIRU1PLTQyIiwiaG9zcGl0YWwiOiJIb3NwaXRhbCBSZWNpZmUgKGV4ZW1wbG8pIiwiYm9sc2FzIjpbIkNILU8tMDE0MiJdfQ==",
+  "resource": "/{proxy+}",
+  "path": "/guias",
+  "httpMethod": "POST",
+  "isBase64Encoded": true,
+  "queryStringParameters": {
+    "foo": "bar"
+  },
+  "multiValueQueryStringParameters": {
+    "foo": [
+      "bar"
+    ]
+  },
+  "pathParameters": {
+    "proxy": "/guias"
+  },
+  "stageVariables": {
+    "baz": "qux"
+  },
+  "headers": {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, sdch",
+    "Accept-Language": "en-US,en;q=0.8",
+    "Cache-Control": "max-age=0",
+    "CloudFront-Forwarded-Proto": "https",
+    "CloudFront-Is-Desktop-Viewer": "true",
+    "CloudFront-Is-Mobile-Viewer": "false",
+    "CloudFront-Is-SmartTV-Viewer": "false",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "CloudFront-Viewer-Country": "US",
+    "Host": "1234567890.execute-api.us-east-1.amazonaws.com",
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Custom User Agent String",
+    "Via": "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Id": "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA==",
+    "X-Forwarded-For": "127.0.0.1, 127.0.0.2",
+    "X-Forwarded-Port": "443",
+    "X-Forwarded-Proto": "https"
+  },
+  "multiValueHeaders": {
+    "Accept": [
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+    ],
+    "Accept-Encoding": [
+      "gzip, deflate, sdch"
+    ],
+    "Accept-Language": [
+      "en-US,en;q=0.8"
+    ],
+    "Cache-Control": [
+      "max-age=0"
+    ],
+    "CloudFront-Forwarded-Proto": [
+      "https"
+    ],
+    "CloudFront-Is-Desktop-Viewer": [
+      "true"
+    ],
+    "CloudFront-Is-Mobile-Viewer": [
+      "false"
+    ],
+    "CloudFront-Is-SmartTV-Viewer": [
+      "false"
+    ],
+    "CloudFront-Is-Tablet-Viewer": [
+      "false"
+    ],
+    "CloudFront-Viewer-Country": [
+      "US"
+    ],
+    "Host": [
+      "0123456789.execute-api.us-east-1.amazonaws.com"
+    ],
+    "Upgrade-Insecure-Requests": [
+      "1"
+    ],
+    "User-Agent": [
+      "Custom User Agent String"
+    ],
+    "Via": [
+      "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)"
+    ],
+    "X-Amz-Cf-Id": [
+      "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA=="
+    ],
+    "X-Forwarded-For": [
+      "127.0.0.1, 127.0.0.2"
+    ],
+    "X-Forwarded-Port": [
+      "443"
+    ],
+    "X-Forwarded-Proto": [
+      "https"
+    ]
+  },
+  "requestContext": {
+    "accountId": "123456789012",
+    "resourceId": "123456",
+    "stage": "prod",
+    "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
+    "requestTime": "09/Apr/2015:12:34:56 +0000",
+    "requestTimeEpoch": 1428582896000,
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "accountId": null,
+      "cognitoIdentityId": null,
+      "caller": null,
+      "accessKey": null,
+      "sourceIp": "127.0.0.1",
+      "cognitoAuthenticationType": null,
+      "cognitoAuthenticationProvider": null,
+      "userArn": null,
+      "userAgent": "Custom User Agent String",
+      "user": null
+    },
+    "path": "/prod/guias",
+    "resourcePath": "/{proxy+}",
+    "httpMethod": "POST",
+    "apiId": "1234567890",
+    "protocol": "HTTP/1.1"
+  }
+}
+
+> sam build
+Building codeuri: [pasta do projeto]\funcao runtime: python3.12 architecture: x86_64 functions: GuiaTransporte
+requirements.txt file not found. Continuing the build without dependencies.
+ Running PythonPipBuilder:CopySource
+
+Build Succeeded
+
+Built Artifacts  : .aws-sam\build
+Built Template   : .aws-sam\build\template.yaml
+
+Commands you can use next
+=========================
+[*] Validate SAM template: sam validate
+
+[*] Invoke Function: sam local invoke
+
+[*] Test Function in the Cloud: sam sync --stack-name {{stack-name}} --watch
+
+[*] Deploy: sam deploy --guided
+
+Invocação isolada 1
+> sam local invoke GuiaTransporte -e events/pedido.json
+No current session found, using default AWS::AccountId
+Invoking app.lambda_handler (python3.12)
+Local image is up-to-date
+Using local image: public.ecr.aws/lambda/python:3.12-rapid-x86_64.
+
+Mounting [pasta do projeto]\.aws-sam\build\GuiaTransporte as /var/task:ro,delegated, inside runtime container
+SAM_CONTAINER_ID: cd067b46af6f43a5a51e74c6763acc28c84b2c2257533bec36b838a4cebbd63e
+START RequestId: ba0bd4e8-e876-4319-a7de-9ba6b70090aa Version: $LATEST
+END RequestId: ba0bd4e8-e876-4319-a7de-9ba6b70090aa
+REPORT RequestId: ba0bd4e8-e876-4319-a7de-9ba6b70090aa	Init Duration: 0.04 ms	Duration: 63.71 ms	Billed Duration: 64 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+{"statusCode": 201, "headers": {"Content-Type": "application/json; charset=utf-8"}, "body": "{\"guia\": \"G-HEMO-42\", \"hospital\": \"Hospital Recife (exemplo)\", \"bolsas\": [\"CH-O-0142\"], \"invocacaoNesteAmbiente\": 1}"}
+Tempo total invocação 1: 9047 ms
+Invocação isolada 2
+> sam local invoke GuiaTransporte -e events/pedido.json
+No current session found, using default AWS::AccountId
+Invoking app.lambda_handler (python3.12)
+Local image is up-to-date
+Using local image: public.ecr.aws/lambda/python:3.12-rapid-x86_64.
+
+Mounting [pasta do projeto]\.aws-sam\build\GuiaTransporte as /var/task:ro,delegated, inside runtime container
+SAM_CONTAINER_ID: f2025f46e6b4bf1e12aa8105210fad63bbbe483e9deb2f28beefa82432b92f15
+START RequestId: acc495a9-1e23-4e21-8952-57b99a40fdd8 Version: $LATEST
+END RequestId: acc495a9-1e23-4e21-8952-57b99a40fdd8
+REPORT RequestId: acc495a9-1e23-4e21-8952-57b99a40fdd8	Init Duration: 0.06 ms	Duration: 64.67 ms	Billed Duration: 65 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+{"statusCode": 201, "headers": {"Content-Type": "application/json; charset=utf-8"}, "body": "{\"guia\": \"G-HEMO-42\", \"hospital\": \"Hospital Recife (exemplo)\", \"bolsas\": [\"CH-O-0142\"], \"invocacaoNesteAmbiente\": 1}"}
+Tempo total invocação 2: 14063 ms
+> sam build --build-dir .aws-sam/timeout-10 --parameter-overrides TimeoutSegundos=10
+Building codeuri: [pasta do projeto]\funcao runtime: python3.12 architecture: x86_64 functions: GuiaTransporte
+requirements.txt file not found. Continuing the build without dependencies.
+ Running PythonPipBuilder:CopySource
+
+Build Succeeded
+
+Built Artifacts  : .aws-sam\timeout-10
+Built Template   : .aws-sam\timeout-10\template.yaml
+
+Commands you can use next
+=========================
+[*] Validate SAM template: sam validate
+
+[*] Invoke Function: sam local invoke -t .aws-sam\timeout-10\template.yaml
+
+[*] Test Function in the Cloud: sam sync --stack-name {{stack-name}} --watch
+
+[*] Deploy: sam deploy --guided --template-file .aws-sam\timeout-10\template.yaml
+
+> sam local start-api --host 127.0.0.1 --port 3101
+> curl -sS --max-time 120 -w "\nHTTP=%{http_code}" -X POST http://127.0.0.1:3101/guias -H "Content-Type: application/json" --data-binary @events/pedido-http.json
+{"guia": "G-HEMO-43", "hospital": "Hospital Caruaru (exemplo)", "bolsas": ["CH-A-0521"], "invocacaoNesteAmbiente": 1}
+HTTP=201
+Tempo HTTP: 5797 ms
+> curl -sS --max-time 120 -w "\nHTTP=%{http_code}" -X POST http://127.0.0.1:3101/guias -H "Content-Type: application/json" --data-binary @events/pedido-http.json
+{"guia": "G-HEMO-43", "hospital": "Hospital Caruaru (exemplo)", "bolsas": ["CH-A-0521"], "invocacaoNesteAmbiente": 1}
+HTTP=201
+Tempo HTTP: 1718 ms
+> curl -sS --max-time 120 -w "\nHTTP=%{http_code}" -X POST http://127.0.0.1:3101/guias -H "Content-Type: application/json" --data-binary @events/pedido-http.json
+{"guia": "G-HEMO-43", "hospital": "Hospital Caruaru (exemplo)", "bolsas": ["CH-A-0521"], "invocacaoNesteAmbiente": 1}
+HTTP=201
+Tempo HTTP: 1719 ms
+> curl -sS --max-time 120 -w "\nHTTP=%{http_code}" -X POST http://127.0.0.1:3101/guias -H "Content-Type: application/json" --data-binary @events/pedido-invalido.json
+{"erro": "requisicaoId obrigatório"}
+HTTP=400
+Tempo HTTP: 1719 ms
+> sam local start-api --host 127.0.0.1 --port 3102 --warm-containers LAZY
+> curl -sS --max-time 120 -w "\nHTTP=%{http_code}" -X POST http://127.0.0.1:3102/guias -H "Content-Type: application/json" --data-binary @events/pedido-http.json
+{"guia": "G-HEMO-43", "hospital": "Hospital Caruaru (exemplo)", "bolsas": ["CH-A-0521"], "invocacaoNesteAmbiente": 1}
+HTTP=201
+Tempo HTTP: 4500 ms
+> curl -sS --max-time 120 -w "\nHTTP=%{http_code}" -X POST http://127.0.0.1:3102/guias -H "Content-Type: application/json" --data-binary @events/pedido-http.json
+{"guia": "G-HEMO-43", "hospital": "Hospital Caruaru (exemplo)", "bolsas": ["CH-A-0521"], "invocacaoNesteAmbiente": 2}
+HTTP=201
+Tempo HTTP: 1062 ms
+> curl -sS --max-time 120 -w "\nHTTP=%{http_code}" -X POST http://127.0.0.1:3102/guias -H "Content-Type: application/json" --data-binary @events/pedido-http.json
+{"guia": "G-HEMO-43", "hospital": "Hospital Caruaru (exemplo)", "bolsas": ["CH-A-0521"], "invocacaoNesteAmbiente": 3}
+HTTP=201
+Tempo HTTP: 1047 ms
+> curl -sS --max-time 120 -w "\nHTTP=%{http_code}" -X POST http://127.0.0.1:3102/guias -H "Content-Type: application/json" --data-binary @events/pedido-lento.json
+{"message":"Internal server error"}
+
+HTTP=502
+Tempo HTTP: 4188 ms
+> sam local start-api --host 127.0.0.1 --port 3103 --template .aws-sam/timeout-10/template.yaml --parameter-overrides TimeoutSegundos=10
+> curl -sS --max-time 120 -w "\nHTTP=%{http_code}" -X POST http://127.0.0.1:3103/guias -H "Content-Type: application/json" --data-binary @events/pedido-lento.json
+{"guia": "G-HEMO-44", "hospital": null, "bolsas": [], "invocacaoNesteAmbiente": 1}
+HTTP=201
+Tempo HTTP: 11562 ms
+Fim: 2026-11-26T16:29:46.387114-03:00

@@ -1,0 +1,18 @@
+No current session found, using default AWS::AccountId
+Mounting GuiaTransporte at http://127.0.0.1:3103/guias [POST]
+You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. If you used sam build before running local commands, you will need to re-run sam build for the changes to be picked up. You only need to restart SAM CLI if you update your AWS SAM template
+2026-11-26 16:29:34 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:3103
+2026-11-26 16:29:34 [33mPress CTRL+C to quit[0m
+2026-11-26 16:29:34 127.0.0.1 - - [26/Nov/2026 16:29:34] "[31m[1mGET / HTTP/1.1[0m" 403 -
+Invoking app.lambda_handler (python3.12)
+Local image is up-to-date
+Using local image: public.ecr.aws/lambda/python:3.12-rapid-x86_64.
+
+Mounting [pasta do projeto]\.aws-sam\timeout-10\GuiaTransporte as /var/task:ro,delegated, inside runtime container
+SAM_CONTAINER_ID: f8fa7901dd7ac7619ab55a1fc7ffabe219de03a8d7596acd4d0b11d2668c8878
+START RequestId: 255f33b7-5d65-4a1d-a66a-f6d8f6d4009e Version: $LATEST
+END RequestId: 255f33b7-5d65-4a1d-a66a-f6d8f6d4009e
+REPORT RequestId: 255f33b7-5d65-4a1d-a66a-f6d8f6d4009e	Init Duration: 0.03 ms	Duration: 5060.78 ms	Billed Duration: 5061 ms	Memory Size: 128 MB	Max Memory Used: 128 MB
+
+2026-11-26 16:29:46 127.0.0.1 - - [26/Nov/2026 16:29:46] "[35m[1mPOST /guias HTTP/1.1[0m" 201 -
