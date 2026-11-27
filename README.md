@@ -52,11 +52,57 @@ sam local start-api --port 3101 --template .aws-sam/timeout-10/template.yaml \
 
 ## Perguntas do enunciado
 
-1. **O que acontece na fase Init?** Um ambiente novo inicializa o runtime Python, importa o módulo e executa o código de nível global, como `contador = 0`. O SAM também precisa inicializar um contêiner ao simular uma chamada fria. Preparar imagens e montar o código pode aumentar a duração medida no terminal. As duas chamadas independentes de `sam local invoke` usam ambientes separados. Na rodada registrada, a primeira levou 9.047 ms e a segunda 14.063 ms de ponta a ponta. Ambas reportaram Init e contador 1. A latência total inclui o SAM e o Docker, além da execução da função. Já no teste HTTP com reaproveitamento, a primeira chamada foi mais lenta que as seguintes.
-2. **O que o contador diz sobre o estado?** Sem contêiner quente, cada chamada HTTP inicia o contador em um ambiente novo. Com `LAZY`, chamadas num mesmo contêiner reaproveitam a variável global. O Lambda pode criar mais ambientes ou descartar o atual. Dados que precisam sobreviver, como o estado de uma solicitação ou um registro oficial de guia, precisam de armazenamento persistente.
-3. **O que mudou no teste lento?** O parâmetro `demorar` faz a função esperar 5 s. Com limite de 3 s, o ambiente encerra a execução e a API devolve um erro. Com limite de 10 s, a espera cabe no tempo de execução e a guia é emitida. O limite máximo de uma invocação Lambda é 900 s (15 minutos). Um trabalho maior pode ser dividido em etapas curtas com fila ou Step Functions. Uma tarefa longa indivisível é mais adequada para um serviço de processamento como ECS ou AWS Batch. [Cotas oficiais do Lambda](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
-4. **Quanto custa um milhão de execuções?** Pelos preços fornecidos no enunciado, sem aplicar franquia gratuita e sem contar API Gateway ou outros serviços, 128 MB = 0,125 GB, 100 ms = 0,1 s. O consumo é 1.000.000 × 0,125 × 0,1 = **12.500 GB-s**. O processamento custa 12.500 × US$ 0,0000166667 = **US$ 0,20833375**. Somando **US$ 0,20** pelas requisições, o total é **US$ 0,40833375**, aproximadamente **US$ 0,41**.
-5. **Onde faz sentido?** No Hemobit, uma função curta faz sentido para montar a guia depois que o sistema já tem o destino e as bolsas reservadas. Para telemetria que recebe dados continuamente ou para coordenar o estado do estoque entre vários pedidos, eu manteria o processamento contínuo e as transações no serviço principal. Cada guia de verdade também precisaria de um registro persistente com emissão idempotente.
+### 1. O que acontece na fase Init?
+
+Nessa fase de início, o ambiente é inicializado, o Python é carregado e as variáveis globais são definidas, como o `contador = 0`. Durante os testes, o SAM também precisou criar um contêiner para executar a função.
+
+Na primeira chamada, o tempo total foi de 9.047 ms e, na segunda, de 14.063 ms. Nas duas chamadas, ocorreu a fase Init e o contador retornou 1, pois foram executadas em ambientes separados.
+
+Vale lembrar que esse tempo também inclui a preparação do SAM e do Docker. Já no teste HTTP com reaproveitamento do ambiente, foi possível perceber que a primeira chamada demorou mais do que as seguintes.
+
+### 2. O que o contador diz sobre o estado?
+
+O contador mostra que, quando um novo ambiente é criado, a variável volta ao seu valor inicial. Ao utilizar o modo `LAZY`, o mesmo contêiner pode ser reaproveitado, fazendo com que o contador continue aumentando a cada chamada.
+
+Porém, não podemos garantir que esse ambiente sempre será mantido, já que o Lambda pode descartá-lo ou criar outros. Por isso, informações importantes, como os dados de uma solicitação ou o registro de uma guia, devem ser salvas em um banco de dados.
+
+### 3. O que mudou no teste lento?
+
+Nesse teste, utilizei o parâmetro `demorar` para fazer a função esperar 5 segundos antes de finalizar. Quando o limite estava configurado para 3 segundos, a função não conseguiu terminar e a API retornou um erro. Se aumentar o limite para 10 segundos, a função conseguiu finalizar normalmente e emitir a guia.
+
+O tempo máximo de execução de uma função Lambda é de 15 minutos. Caso seja necessário executar uma tarefa que demore mais do que isso, uma alternativa seria dividir o processamento em etapas menores, utilizando filas ou o AWS Step Functions. Se não for possível dividir a tarefa, seria melhor utilizar outros serviços, como o ECS ou o AWS Batch.
+
+[Documentação oficial sobre os limites do Lambda](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
+
+### 4. Quanto custa um milhão de execuções?
+
+Considerando os valores fornecidos no enunciado, temos:
+
+- **Memória utilizada:** 128 MB = 0,125 GB;
+- **Tempo de execução:** 100 ms = 0,1 segundo;
+- **Quantidade de execuções:** 1.000.000.
+
+Primeiro, vamos calcular o consumo total:
+
+`1.000.000 × 0,125 × 0,1 = 12.500 GB-s`
+
+Depois, calculamos o custo de processamento:
+
+`12.500 × US$ 0,0000166667 = US$ 0,20833375`
+
+Somando o custo de processamento com o custo das requisições:
+
+`US$ 0,20833375 + US$ 0,20 = US$ 0,40833375`
+
+Portanto, um milhão de execuções custaria aproximadamente **US$ 0,41**, sem considerar a franquia gratuita e os custos de outros serviços, como o API Gateway.
+
+### 5. Onde faz sentido?
+
+No Hemobit, acredito que o uso do Lambda faz sentido para tarefas rápidas e específicas, como a geração de uma guia após a definição do destino e a reserva das bolsas de sangue.
+
+Já para atividades que precisam funcionar continuamente, como o recebimento de dados de telemetria e o controle de estoque entre diferentes solicitações, considero mais adequado manter essas responsabilidades no serviço principal do sistema.
+
+Também seria importante salvar as guias emitidas em um banco de dados e garantir que uma mesma solicitação não gere guias duplicadas, mesmo que a função seja executada mais de uma vez.
 
 ## Evidências
 
